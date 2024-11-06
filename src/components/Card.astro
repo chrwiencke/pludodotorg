@@ -11,14 +11,14 @@ const { hosted, title, body, source, dato } = Astro.props;
 ---
 
 <div>
-	<div class="card dark:bg-black bg-neutral-200 border border-gray-500 rounded-2xl text-neutral-content w-96 m-5">
+	<div class="card dark:bg-neutral-900 bg-neutral-200 border border-gray-500 rounded-2xl text-neutral-content w-96 m-5">
 		<div class="card-body items-center text-center">
-		  <h2 class="card-title dark:text-white text-black">{title}</h2>
+		  <h2 class="card-title dark:text-white text-black font-bold">{title}</h2>
 		  <p class="dark:text-white text-black">{body}</p>
 		  <p class="dark:text-white text-black text-sm">{dato}</p>
 		  <div class="card-actions justify-end">
-			<a href={hosted}><button class="btn btn-primary dark:text-white text-black">Side</button></a>
-			<a href={source}><button class="btn btn-primary dark:text-white text-black">Kode</button></a>
+			<a href={hosted} target="_blank"><button class="btn btn-primary dark:text-white text-black">Side</button></a>
+			<a href={source} target="_blank"><button class="btn btn-primary dark:text-white text-black">Kode</button></a>
 		  </div>
 		</div>
 	  </div>
