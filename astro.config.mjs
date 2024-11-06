@@ -1,7 +1,5 @@
 import { defineConfig } from 'astro/config';
 
-import htmx from 'astro-htmx';
-
 import cloudflare from '@astrojs/cloudflare';
 
 import tailwind from '@astrojs/tailwind';
@@ -15,7 +13,6 @@ export default defineConfig({
     }
   }),
   integrations: [
-    htmx(), 
     tailwind()
   ],
 });
