@@ -1,6 +1,10 @@
 import { defineConfig } from 'astro/config';
 
+import htmx from 'astro-htmx';
+
 import cloudflare from '@astrojs/cloudflare';
+
+import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,5 +13,9 @@ export default defineConfig({
     platformProxy: {
       enabled: true
     }
-  })
+  }),
+  integrations: [
+    htmx(), 
+    tailwind()
+  ],
 });
