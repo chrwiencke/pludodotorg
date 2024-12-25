@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 ---
-
 <Layout title="Pludo Directory">
 	<main>
 		<div>
@@ -12,17 +11,29 @@ import Card from '../components/Card.astro';
 		</div>
 		<div class="flex flex-wrap p-5 justify-center">
 			<Card 
+			hosted="https://chw.no/"
+			title="CV"
+			body="Side Quest"
+			source="https://github.com/chrwiencke/Astro-CV"
+			dato="2 Nov, 2024"/>
+			<Card 
 			hosted="https://donotshow.me/"
 			title="Temporary Email"
-			body="Side Quest"
+			body="Privacy Project"
 			source="https://github.com/chrwiencke/RobertMail"
 			dato="15 Des, 2024"/>
 			<Card 
-			hosted="https://chw.no/"
-			title="Personlig Side"
-			body="Læring"
-			source="https://github.com/chrwiencke/Astro-CV"
-			dato="2 Nov, 2024"/>
+			hosted="https://dnstemple.pludo.org/"
+			title="Privacy-focused DNS"
+			body="Privacy Project"
+			source="/na"
+			dato="25 Des, 2024"/>
+			<Card 
+			hosted="https://short.pludo.org/"
+			title="Short Short URL"
+			body="Privacy Project"
+			source="https://github.com/chrwiencke/shortlinkcfhono"
+			dato="21 Des, 2024"/>
 			<Card 
 			hosted="https://gitbook.pludo.org/k3s"
 			title="Kubernetes Prosjekt"
