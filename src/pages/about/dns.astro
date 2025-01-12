@@ -10,4 +10,107 @@ import AboutPage from '../../components/AboutPage.astro';
         motivation="Med omfattende sporing fra internettleverandører, myndigheter og andre aktører, er det viktig å beskytte DNS-forespørslene dine for å ivareta personvernet ditt og forhindre uautorisert tilgang til din nettaktivitet."
         solution="En personvernfokusert DNS-server med DNS-over-HTTPS, standard IPv4 DNS, ingen logging, avanserte personvernfunksjoner og drevet av Unbound for økt sikkerhet og pålitelighet."
     />
+    <div class="container mx-auto px-4 max-w-4xl mb-16">
+        <h2 class="text-center dark:text-white text-black md:text-4xl font-bold mb-8 font-mono text-wrap text-2xl">
+            Oppsett av server
+        </h2>
+        <div class="space-y-6">
+            <h3 class="text-xl dark:text-white text-black font-mono font-bold">
+                Installer og sett opp Unbound med DoT og DoH
+            </h3>
+            
+            <div class="space-y-4">
+                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+<code>sudo apt install unbound</code>
+                </pre>
+                
+                <p class="dark:text-gray-300 text-gray-700">Rediger Unbound konfigurasjonsfilen:</p>
+                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+<code>sudo nano /etc/unbound/unbound.conf</code>
+                </pre>
+                
+                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto whitespace-pre">
+                    <code>
+server:
+    verbosity: 0
+    num-threads: 2
+    interface: 0.0.0.0
+    port: 53
+    interface: 0.0.0.0@443
+    tls-service-key: "/etc/letsencrypt/live/dns.pludo.org/privkey.pem"
+    tls-service-pem: "/etc/letsencrypt/live/dns.pludo.org/fullchain.pem"
+    tls-cert-bundle: "/etc/ssl/certs/ca-certificates.crt"
+    https-port: 443
+    http-endpoint: "/dns-query"
+    http-max-streams: 100
+    access-control: 0.0.0.0/0 allow
+    access-control: ::0/0 allow
+    hide-identity: yes
+    hide-version: yes
+    use-caps-for-id: yes
+    harden-glue: yes
+    harden-dnssec-stripped: yes
+    harden-below-nxdomain: yes
+    harden-referral-path: yes
+    qname-minimisation: yes
+    qname-minimisation-strict: no
+    auto-trust-anchor-file: "/var/lib/unbound/root.key"
+    val-clean-additional: yes
+    trust-anchor-signaling: yes
+    cache-min-ttl: 300
+    cache-max-ttl: 86400
+    prefetch: yes
+    prefetch-key: yes
+    serve-expired: no
+    rrset-cache-size: 256m
+    msg-cache-size: 128m
+    so-rcvbuf: 1m</code>
+                </pre>
+
+                <div class="space-y-2">
+                    <p class="dark:text-gray-300 text-gray-700">Installer og konfigurer SSL-sertifikat:</p>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+<code>apt-get install certbot
+certbot certonly --standalone -d dns.pludo.org</code>
+                    </pre>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="dark:text-gray-300 text-gray-700">Sett opp DNSSEC:</p>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+<code>sudo apt install unbound-anchor
+sudo unbound-anchor -a "/var/lib/unbound/root.key"
+sudo chown unbound:unbound /var/lib/unbound/root.key
+sudo wget https://www.internic.net/domain/named.cache -O /var/lib/unbound/root.hints
+sudo chown unbound:unbound /var/lib/unbound/root.hints
+sudo unbound-checkconf</code>
+                    </pre>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="dark:text-gray-300 text-gray-700">Konfigurer system DNS:</p>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+<code>sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+sudo mv /etc/resolv.conf /etc/resolv.conf.backup
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolv.conf'
+sudo systemctl restart unbound
+sudo systemctl enable unbound</code>
+                    </pre>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="dark:text-gray-300 text-gray-700">Konfigurer brannmur:</p>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+<code>sudo ufw allow 53
+sudo ufw allow 443
+sudo ufw allow 22
+sudo ufw enable
+sudo systemctl enable ufw
+sudo systemctl start ufw</code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
 </Layout>
