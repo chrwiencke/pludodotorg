@@ -2,12 +2,26 @@
 import Layout from '../../layouts/Layout.astro';
 import AboutPage from '../../components/AboutPage.astro';
 ---
-<Layout title="About Do Not Show Me">
+<Layout title="Om Do Not Show Me">
     <AboutPage 
         title="Do Not Show Me"
-        firsth2="Infrastructure"
+        firsth2="Infrastruktur"
         file="dnsminf.svg"
-        motivation="Sharing your email with every website clutters your inbox with spam, advertisements, scams, and makes finding important messages difficult. By avoiding this, you also protect your data from being sold and linked to your other online activities."
-        solution="Instead of sharing your email to access an article or any other website, simply visit donotshow.me, click 'Use Email,' paste the generated email into the website, verify using the link sent to that email, and you're done."
+        motivation="Når du deler e-posten din med alle nettsidene du besøker fylles innboksen din med spam, reklame, svindel og gjør det vanskelig å finne viktige meldinger. Ved å unngå å gi ut e-post addressen din beskytter du også dataene dine fra å bli solgt og knyttet til andre aktiviteter på nettet."
+        solution="I stedet for å dele e-posten din for å få tilgang til en artikkel eller andre nettsider, kan du ganske enkelt besøke donotshow.me, klikke på 'Bruk e-post,' lime inn den genererte e-posten på nettsiden, bekrefte ved hjelp av lenken sendt til den e-posten, og så er du ferdig."
     />
+    <div class="container mx-auto px-4 max-w-4xl mb-16">
+        <h2 class="text-center dark:text-white text-black md:text-4xl font-bold mb-8 font-mono text-wrap text-2xl">
+            Statistikk
+        </h2>
+        <div class="flex flex-col items-center">
+            <img src="/statsdnsm.png" alt="Statistikk for Do Not Show Me" class="max-w-full h-auto">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 italic text-center">
+                Første måneden med tjenesten åpen.
+            </p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 italic text-center">
+                Noen prøvde å ddose på den 17. Desember
+            </p>
+        </div>
+    </div>
 </Layout>
