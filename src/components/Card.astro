@@ -5,9 +5,10 @@ interface Props {
 	dato: string;
 	hosted: string;
 	source: string;
+	about: string;
 }
 
-const { hosted, title, body, source, dato } = Astro.props;
+const { hosted, title, body, source, dato, about } = Astro.props;
 ---
 
 <div>
@@ -17,8 +18,9 @@ const { hosted, title, body, source, dato } = Astro.props;
 		  <p class="dark:text-white text-black">{body}</p>
 		  <p class="dark:text-white text-black text-sm">{dato}</p>
 		  <div class="card-actions justify-end">
-			<a href={hosted} target="_blank"><button class="btn btn-primary dark:text-white text-black">Side</button></a>
-			<a href={source} target="_blank"><button class="btn btn-primary dark:text-white text-black">Kode</button></a>
+			<a href={hosted} target="_blank"><button class={`btn btn-primary dark:text-white text-black ${hosted === '/na' ? 'btn-disabled opacity-50 cursor-not-allowed' : ''}`}>Side</button></a>
+			<a href={source} target="_blank"><button class={`btn btn-primary dark:text-white text-black ${source === '/na' ? 'btn-disabled opacity-50 cursor-not-allowed' : ''}`}>Kode</button></a>
+			<a href={about} target="_blank"><button class={`btn btn-primary dark:text-white text-black ${about === '/na' ? 'btn-disabled opacity-50 cursor-not-allowed' : ''}`}>About</button></a>
 		  </div>
 		</div>
 	  </div>

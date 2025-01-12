@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+<Layout title="Pludo Directory">
+	<main>
+		<div>
+			<h1 class="text-center dark:text-white text-black md:text-8xl font-bold pt-8 font-mono text-wrap text-2xl">
+				Not Impressive
+			</h1>
+		</div>
+		<div class="flex flex-wrap p-5 justify-center">
+			<Card 
+			hosted="https://weather.pludo.org/"
+			title="Weather Flare"
+			body="Liten Side Quest"
+			source="/na"
+			about="/na"
+			dato="31 Okt, 2024"/>
+			<Card 
+			hosted="https://artikkel.pludo.org/politikk"
+			title="Artikkel Nyheter"
+			body="Skole Oppgave"
+			source="/na"
+			about="/na"
+			dato="31 Okt, 2024"/>
+			<Card 
+			hosted="https://ip.pludo.org/"
+			title="IP Getter"
+			body="Liten Utility"
+			source="/na"
+			about="/na"
+			dato="31 Okt, 2024"/>
+		</div>
+	</main>
+</Layout>
